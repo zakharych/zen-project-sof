@@ -1,0 +1,6 @@
+.env
+.lsp
+.clj-kondo
+/project/zen-packages
+/pgdata
+lock

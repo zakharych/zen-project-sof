@@ -1,0 +1,37 @@
+{:ns system
+ :import #{aidbox}
+
+
+ seed
+ {:zen/tags  #{aidbox/service}
+  :engine   aidbox/seed
+  :resources [{:id "rpt-1" :resourceType "Patient"}
+              {:id "sp-1" :resourceType "Specimen"}
+              {:resourceType "ViewDefinition"
+               :id "specimen_view_s"
+               :description "Specimen flat view"
+               :name "specimen_view_s"
+               :extension [{:url "materialization"
+                            :value {:code "view"}}]
+               :status "active"
+               :resource "Specimen"
+               :select [{:path "id" :alias "id"}]}]}
+
+ my-seed-v2
+ {:zen/tags  #{aidbox/service}
+  :engine    aidbox/seed-v2
+  :resources {:ViewDefinition  {:specimen_view_s2 {:description "Specimen flat view 2"
+                                                   :name "specimen_view_s2"
+                                                   :extension [{:url "materialization"
+                                                                :value {:code "view"}}]
+                                                   :status "active"
+                                                   :resource "Specimen"
+                                                   :select [{:path "id" :alias "id"}]}}}}
+
+
+
+ box
+ {:zen/tags #{aidbox/system}
+  :zen/desc "app"
+  :services {:seed seed
+             :my-seed-v2 my-seed-v2}}}

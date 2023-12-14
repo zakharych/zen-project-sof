@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  aidbox-db:
+    image: "${PGIMAGE}"
+    ports:
+      - "${PGHOSTPORT}:${PGHOSTPORT}"
+    environment:
+      POSTGRES_USER: "${PGUSER}"
+      POSTGRES_PASSWORD: "${PGPASSWORD}"
+      POSTGRES_DB: "${PGDATABASE}"
+    env_file:
+      - .env
+
+  aidbox:
+    image: "${AIDBOX_IMAGE}"
+    pull_policy: always
+    depends_on: ["aidbox-db"]
+    links:
+      - "aidbox-db:database"
+    ports:
+      - "${AIDBOX_PORT}:${AIDBOX_PORT}"
+    volumes:
+      - "./project/:${BOX_PROJECT_GIT_TARGET__PATH}"
+    env_file:
+      - .env
