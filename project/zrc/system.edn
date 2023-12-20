@@ -5,6 +5,7 @@
  seed
  {:zen/tags  #{aidbox/service}
   :engine   aidbox/seed
+  :files     ["vd.ndjson.gz"]
   :resources [{:id "rpt-1" :resourceType "Patient"}
               {:id "sp-1" :resourceType "Specimen"}
               {:resourceType "ViewDefinition"
